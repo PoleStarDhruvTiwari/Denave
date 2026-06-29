@@ -2,6 +2,51 @@
 ---
 
 
+## System Architecture
+
+```mermaid
+flowchart TD
+
+    A["User Input<br/>(Ticker or PDF)"]
+
+    B["DocumentFetcher<br/>from_ticker()<br/>from_pdf()"]
+
+    C["Section Identifier<br/>Regex-based splitter"]
+
+    subgraph LG["LangGraph Workflow"]
+
+        D["Extract Financials"]
+
+        E["Validate Data"]
+
+        F["Extract Risk Factors"]
+
+        G["Extract Business Segments"]
+
+        H["Quality Check"]
+
+        I["Final JSON Output"]
+
+        D --> E
+
+        E -- Validation Failed --> D
+
+        E --> F
+
+        F --> G
+
+        G --> H
+
+        H --> I
+    end
+
+    A --> B
+
+    B --> C
+
+    C --> D
+```
+
 
 # 🏦 Financial Document Extractor — Complete Guide
 
